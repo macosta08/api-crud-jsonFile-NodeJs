@@ -1,0 +1,321 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Practica realizando CRUD con express",
+    "description": "Documentación generada automáticamente por el módulo <b>swagger.autogen</b>."
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/list": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para obtener todos los usuarios.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Usuários",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+    },
+    "/user/add": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para agregar un usuario.",
+        "parameters": [
+          {
+            "name": "newUser",
+            "in": "body",
+            "description": "Información del usuario.",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AddUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario agregado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/AddUser_Ok"
+            }
+          },
+          "401": {
+            "description": "Falta información para crear el usuario",
+            "schema": {
+              "$ref": "#/definitions/AddUser_missingData"
+            }
+          },
+          "409": {
+            "description": "Usuario ya existe",
+            "schema": {
+              "$ref": "#/definitions/AddUser_Exists"
+            }
+          }
+        }
+      }
+    },
+    "/user/delete/{username}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para eliminar por usuario.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Removed_user"
+            }
+          },
+          "410": {
+            "description": "Usuario no existe",
+            "schema": {
+              "$ref": "#/definitions/Not_exists_user"
+            }
+          }
+        }
+      }
+    },
+    "/user/update/{username}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para editar por usuario.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "fullname": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "age": {
+                  "type": "string",
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario editado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Updated_successfully"
+            }
+          },
+          "409": {
+            "description": "Usuario no existe",
+            "schema": {
+              "$ref": "#/definitions/Not_exists_user"
+            }
+          }
+        }
+      }
+    },
+    "/user/deleteall": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para eliminar todos los usuario.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Todos los usuarios eliminados exitosamente",
+            "schema": {
+              "$ref": "#/definitions/All_users_removed"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Users": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "ricardo"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234"
+          },
+          "fullname": {
+            "type": "string",
+            "example": "ricardo gatti acosta"
+          },
+          "age": {
+            "type": "number",
+            "example": 4
+          }
+        }
+      }
+    },
+    "AddUser": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "marcos"
+        },
+        "password": {
+          "type": "string",
+          "example": "4321"
+        },
+        "fullname": {
+          "type": "string",
+          "example": "marcos gatti soto"
+        },
+        "age": {
+          "type": "number",
+          "example": 37
+        }
+      }
+    },
+    "AddUser_Ok": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "User added successfully"
+        }
+      }
+    },
+    "AddUser_Exists": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "Username already exist"
+        }
+      }
+    },
+    "AddUser_missingData": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "User data missing"
+        }
+      }
+    },
+    "Not_exists_user": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "Username does not exist"
+        }
+      }
+    },
+    "Removed_user": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "User :username removed successfully"
+        }
+      }
+    },
+    "Updated_successfully": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "User :username updated successfully "
+        }
+      }
+    },
+    "All_users_removed": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "msg": {
+          "type": "string",
+          "example": "All Users removed successfully"
+        }
+      }
+    }
+  }
+}
