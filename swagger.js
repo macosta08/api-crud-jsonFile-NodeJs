@@ -10,9 +10,9 @@ const doc = {
     description:
       "Documentación generada automáticamente por el módulo <b>swagger.autogen</b>.",
   },
-  host: "localhost:5000",
+  host: "quiet-dawn-53428.herokuapp.com",
   basePath: "/",
-  schemes: ["http", "https"],
+  schemes: ["https", "http"],
   consumes: ["application/json"],
   produces: ["application/json"],
   tags: [

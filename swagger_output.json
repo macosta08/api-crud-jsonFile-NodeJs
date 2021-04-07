@@ -5,7 +5,7 @@
     "title": "Practica realizando CRUD con express",
     "description": "Documentación generada automáticamente por el módulo <b>swagger.autogen</b>."
   },
-  "host": "localhost:5000",
+  "host": "quiet-dawn-53428.herokuapp.com",
   "basePath": "/",
   "tags": [
     {
@@ -14,8 +14,8 @@
     }
   ],
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "consumes": [
     "application/json"
